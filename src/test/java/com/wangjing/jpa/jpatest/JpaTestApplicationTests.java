@@ -1,6 +1,7 @@
 package com.wangjing.jpa.jpatest;
 
 import com.wangjing.jpa.jpatest.entity.UserAddress;
+import com.wangjing.jpa.jpatest.entity.UserVO;
 import com.wangjing.jpa.jpatest.entity2.User2;
 import com.wangjing.jpa.jpatest.entity3.Student;
 import com.wangjing.jpa.jpatest.entity4.Customer;
@@ -8,6 +9,7 @@ import com.wangjing.jpa.jpatest.repository.CustomerRepository;
 import com.wangjing.jpa.jpatest.repository.StudentRepository;
 import com.wangjing.jpa.jpatest.repository.UserRepository;
 import com.wangjing.jpa.jpatest.repository.UserRepository2;
+import com.wangjing.jpa.jpatest.repository.UserVORepository;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +38,9 @@ public class JpaTestApplicationTests {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private UserVORepository userVORepository;
+
     @Ignore
     @Test
     public void contextLoads() {
@@ -51,7 +56,7 @@ public class JpaTestApplicationTests {
     @Test
     public void testUserAddress() {
         Sort sort = new Sort(Sort.Direction.ASC, "id");
-        Page<UserAddress> allUserAddress = userRepositoryNew.findAllUserAddress(PageRequest.of(0, 10, sort));
+        Page<UserAddress> allUserAddress = userRepositoryNew.findAllUserAddress(PageRequest.of(0, 1, sort));
         for (UserAddress userAddress : allUserAddress) {
             System.out.println(userAddress);
         }
@@ -61,13 +66,22 @@ public class JpaTestApplicationTests {
     @Ignore
     @Test
     public void testManyToOne(){
-        List<Student> students = studentRepository.findAll();
+        Page<Student> students = studentRepository.findAll(PageRequest.of(1,1));
+//        List<Student> students = studentRepository.findAll();
         students.forEach(System.out::println);
     }
 
+    @Ignore
     @Test
     public void testManyToMany(){
         List<Customer> customers = customerRepository.findAll();
         customers.forEach(System.out::println);
+    }
+
+    @Test
+    public void testUserVO(){
+        for (UserVO allUserAddress : userVORepository.findAllUserAddress()) {
+            System.out.println(allUserAddress);
+        }
     }
 }

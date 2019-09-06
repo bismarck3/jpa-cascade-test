@@ -34,7 +34,7 @@ public class Customer {
     private String name;
 
     @ManyToMany(mappedBy = "customerSet", fetch = FetchType.EAGER)
-    private Set<Order> orderSet = new HashSet<>();;
+    private Set<Order> orderSet = new HashSet<>();
 
     /**
      * @return the id

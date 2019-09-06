@@ -8,6 +8,7 @@ package com.wangjing.jpa.jpatest.repository;
 
 import com.wangjing.jpa.jpatest.entity3.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * StudentRepository
@@ -17,5 +18,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2019/6/10 11:38
  * @version v1.0.0
  */
-public interface StudentRepository extends JpaRepository<Student, String> {
+public interface StudentRepository extends JpaRepository<Student, String>, JpaSpecificationExecutor<Student> {
 }
